@@ -1,0 +1,59 @@
+=============================================================
+README - BY 2018/08/20
+=============================================================
+
+---------------------------------------------
+What is this directory, and the things in it?
+---------------------------------------------
+This directory contains classes that are used by specific features/components for logging stats. StatsManager calls
+clutter up our nice code. They are often placed in many areas of new features, and are scattered throughout the codebase!
+They can either increase lines of code in a function, and/or make it extremely hard to read when reviewing PRs on github.
+Furthermore, they don't do anything for us devs.
+
+With having features/components in one place, it will make it easier to update/change stats as needed. Rather than searching for
+all the places a stat is used.
+
+When asked to add stats for a feature/component/flow, consider creating an associated static class like the ones found in this
+directory. Then instead of calling StatManager.Instance.Log... call your StatsFeature.LogMyStat()
+
+E.g.
+
+Say you want to log a counter stat for robust challenges when the dialog opens.
+
+Instead of something like:
+public class RobustChallengesMOTD : DialogBase
+{    
+	public override void init()
+	{
+        // oh no, look how horrible this already
+		StatsManager.Instance.LogCount("dialog", "robust_challenges_motd", campaign.campaignID, GameState.game != null ? GameState.game.keyName : "", campaign.currentEventIndex.ToString(), "view");
+	}
+}
+
+Do this!
+public class RobustChallengesMOTD : DialogBase
+{    
+	public override void init()
+	{
+        // oh no, look how horrible this already
+		StatsRobustChallenges.logOpenDialog(campaign);
+	}
+}
+
+public class StatsRobustChallenges
+{
+    public static void logOpenDialog(ChallengeCampaign campaign)
+    {
+        StatsManager.Instance.LogCount("dialog", "robust_challenges_motd", campaign.campaignID, GameState.game != null ? GameState.game.keyName : "", campaign.currentEventIndex.ToString(), "view");
+    }
+}
+
+Ah, so much better, hooray.
+
+
+---------------------------------------------
+Naming Convention
+---------------------------------------------
+
+For stats classes I recommend using the prefix Stats. So for robust challenges example above it's StatsRobustChallenges.
+This will make it easier to find when searching for a feature's stat class

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: f70eec4d9779d438e856312ead822446
+timeCreated: 1505930416
+licenseType: Pro
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - amountLabel: {instanceID: 0}
+  - amountLabelWrapperComponent: {instanceID: 0}
+  - tapToSkipIcon: {fileID: 1163656085773842, guid: 588a959a41c304313b156f3575991e89,
+      type: 2}
+  - amountTMPro: {instanceID: 0}
+  - wingsPrefab: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

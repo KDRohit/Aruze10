@@ -1,0 +1,61 @@
+{
+	"Back": {
+		"action": "click",
+		"zapButtonId": "OverlayTop/BackButton"
+	},
+	"CoinDialogOpen": {
+		"action": "click",
+		"zapButtonId": "OverlayTop/MeterButton"
+	},
+	"RandomClick": {
+		"action": "randomClick"
+	},
+	"FreeSpinCheat": {
+		"action": "keyPress",
+		"key": "g"
+	},
+	"PickingGameCheat": {
+		"action": "keyPress",
+		"key": "c"
+	},
+	"CoinDialogClose": {
+		"action": "click",
+		"zapButtonId": "BuyCredits/CloseButton"
+	},
+	"LobbyDailyBonusOpen" : {
+		"action": "click",
+		"zapButtonId" : "Lobby/DailyBonusOpenButton"
+	},
+	"DailyBonusDialogCollectButton" : {
+		"action" : "click",
+		"zapButtonId" : "DailyBonus/DialogCollectButton"
+	},
+	"RobustInGameLobbyButton": {
+		"action" : "click",
+		"zapButtonId" : "RobustChallenges/LobbyInGameButton"
+	},
+	"RobustDialogCloseButton" : {
+		"action": "click",
+		"zapButtonId" : "RobustChallenges/ObjectiveDialogCloseButton"
+	},
+	"RobustDialogObjectiveButton" : {
+		"action": "randomButton",
+		"zapButtonId" : "RobustChallenges/ObjectiveDialogPlayButton"
+	},
+	"RobustDialogCollectButton" : {
+		"action": "click",
+		"zapButtonId" : "RobustChallenges/ObjectiveDialogCollectButton"
+	},
+	"Spin": {
+		"action": "click",
+		"zapButtonId": "SpinPanel/spinButton"
+	},
+	"SpinPanelBetUp" : {
+		"action" : "click",
+		"zapButtonId" : "SpinPanel/BetUpButton"
+	},
+	"SpinPanelBetDown" : {
+		"action" : "click",
+		"zapButtonId" : "SpinPanel/BetDownButton"
+	}
+}

@@ -1,0 +1,180 @@
+﻿using UnityEngine;
+using System.Collections;
+
+/*
+Holds all PlayerPrefs keys used in the game.
+*/
+
+// Runtime keys - Only put keys here that are used in the final build.
+// See DebugPrefs below for Debug/Editor keys.
+public static class Prefs
+{
+	public const string FIRST_APP_START_TIME = "firstAppStartTime";
+	public const string LAST_RATE_ME_PROMPT_TIME = "lastRateMePromptTime";
+	public const string LAST_RATE_ME_PROMPT_VERSION = "lastRateMePromptVersion";
+	public const string RATE_ME_PROMPT_ACCEPTED_VERSION = "rateMePromptAccepted";
+	public const string RATE_ME_VERSION_VIEW_COUNT = "rateMeVersionViewCount";
+	public const string LAST_GC_LOGIN_PROMPT = "gcloginprompt";
+	public const string LAST_GC_LOGIN_ATTEMPTS = "gcloginattempts"; 
+	public const string EARLY_ACCESS_RECENT = "recentEarlyAccessKey";
+	public const string RWR_PROMO_RECENT = "recentRWRPromo";
+	public const string SHOWN_RWR_SWEEPSTAKES_NAG = "hasShownRWRSweepstakesNag";
+	public const string SHOWN_VIP_PROGRESSIVES_JACKPOT_MOTD = "hasShownVIPProgressivesJackpotMOTD";
+	public const string SHOWN_JACKPOT_UNLOCK_GAME_MOTD = "hasShownJackpotUnlockGameMOTD";
+	public const string STARTERPACK_SLIDING_TIME = "starterPackPromptSlidingTime";
+	public const string OG_PUBLISH_PERMISSION = "publish_";		// The user's facebook id is appended to this at runtime.
+	public const string REQUEST_RESULT_URL = "requestResultURL";
+	public const string MUTE_SOUND_PREF = "settingMuteSound";
+	public const string MUTE_MUSIC_PREF = "settingMuteMusic";
+	public const string MAX_SOUND_VOLUME = "settingMaxVolume";
+	public const string LAST_SLOT_GAME = "lastSlotGame";
+	public const string SEEN_ANON_DIALOG = "seenAnonDialog";
+	public const string REINITIALIZE_GAME = "ReinitializeGame";	// This seems to be set but never read. Maybe it can be removed?
+	public const string UPGRADE_FROM_SOCIAL_SCREEN = "UpgradeFromSocialScreen"; // This is turned on when logging into a social network from the social screen.  G+ forces this to be a player pref.
+	public const string LOGOUT_FROM_SN = "LogoutFromSocialNetwork";
+	public const string TARGETED_SALE_DISPLAY_DATE = "targeted_sale_display_date";
+	public const string SOFT_NOTIFICATION_PROMPT = "soft_notification_prompt";
+	public const string SOFT_NOTIFICATION_PROMPT_TRIGGER_COUNTER = "soft_notification_prompt_trigger_counter";
+	public const string SOFT_NOTIFICATION_PROMPT_CAP_COUNTER = "soft_notification_prompt_cap_counter";
+	public const string PREMIUM_GAME_DIALOG_TEMPLATE = "premium_game_dialog_{0}_{1}";
+	public const string SHOWN_LOGIN_DIALOG = "hasShownLoginDialog"; // Whether or not he have prompted the user with the login dialog.
+	public const string AUTH_FLOW_VARIANT = "authFlowVariant"; // The random number generated at install for their experiment variant.
+	public const string ASK_FOR_COINS_LAST_TIME = "askForCoinsLastTime"; // Last time it surfaced the Ask For Coins Dialog.
+	public const string PLAYER_ALERTS = "playerAlertsOn";
+	public const string PLAYER_PERF = "playerPerformanceMode";
+	public const string SHOWN_MYSTERY_GIFT_MOTD_DIALOG = "hasShownMysteryGiftMOTDDialog"; // Whether or not he have shown the user the Mystery Gift MOTD dialog.
+	public const string SHOWN_DAILY_RACE_MOTD_DIALOG = "hasShownDailyRaceMOTDDialog"; // Whether or not he have shown the user the Daily Race MOTD dialog.
+	public const string HAS_WOZ_SLOTS_INSTALLED_BEFORE_CHECK = "hasWozSlotsInstalledBeforeCheck";	// Let's us know how to word the xpromo dialog.
+	public const string OTHER_APPS_INSTALLED_BEFORE_CHECK = "otherAppsInstalledList"; // The json representation of what apps are installed on the device
+	public const string LOADING_SCREEN_DATA_VERSION = "loadingScreenDataVersion"; // The version number of our current dynamic loading screen data.
+	public const string SOFTWARE_UPDATE_CHECK_COUNT = "softwareUpdateCount"; // The number of times we have checked since the update dialog was last shown.
+	public const string SOFTWARE_UPDATE_VIEW_COUNT = "softwareUpdateViewCount"; // The total number of times we have showed the software update dialog.
+	public const string MOBILE_ASSET_STREAMING_VERSION = "mobileAssetStreamingVersion"; // The last mobile asset streaming version we read from the server.
+	public const string PREVIOUS_DATA_URL = "previousDataUrl"; // The last data url that we loaded the app with.
+	public const string PREVIOUS_APP_VERSION = "previousAppVersion"; // The last app version that was loaded.
+	public const string AUTO_LOAD_GAME_KEY = "autoLoadGameKey"; // The game key we want to load up to, skipping the lobby.
+	public const string LAST_PRE_LOBBY_MESSAGE = "lastPreLobbyMessage"; // The last pre lobby message string we showed.
+	public const string LAST_DYNAMIC_MOTD = "lastDynamicMotd"; // The last json blob for dynamic MOTD we received.
+	public const string DYNAMIC_MOTD_VIEW_COUNT = "dynamicMotdViewCount"; // The number of times the user has seen the currently set dynamic motd.
+	public const string DYNAMIC_MOTD_LAST_SHOW_TIME = "dynamicMotdLastShowTime"; // The UTC seconds time of the last time the dynamic MOTD was shown.
+	public const string SHOWN_CHARMS_TOOLTIP = "hasShownCharmsTooltip";	// Has the charms tooltip been shown to the player?
+	public const string LAST_SEEN_NEW_VIP_GAME = "lastNewVIPGame";	// The last game key that was a vip game. When different, shows the "NEW GAME" thing on the VIP button.
+	public const string LAST_SEEN_MOTD_QUEST_COUNTER = "lastSeenMOTDQuestCounter";  // The quest counter for the last time the quest MOTD was shown.
+	public const string CLIENT_VERSION = "CLIENT_VERSION";	//version of client currently running (string format)
+	public const string WARNINGS_SKIPPED_WHEN_FRIENDS_MISSING = "warningSkipsWhenFriendsMissing";
+	public const string LAST_SHOWED_RAINY_DAY_STARTUP_BUY_TIME = "lastShowedRainyDayStartupBuyTime";
+	public const string ANONYMOUS_ZID = "anonZid";
+	public const string LAST_QUEST_COUNTER = "lastQuestCounter";
+	public const string ENABLE_PN_SOFT_PROMPT_SEEN_COUNT = "enable_pn_soft_prompt_seen_count";
+	public const string SOFT_PROMPT_SEEN_COUNT = "soft_prompt_seen_count";
+	public const string DEEP_LINK_PN_PROMPT_COUNT_KEY = "deep_link_prompt_count";
+	public const string COLLECT_COUNT_KEY = "daily_bonus_collect_count"; 
+	public const string FORCED_COLLECT_COUNT_KEY = "daily_bonus_forced_collect";
+	public const string HARD_PROMPT_ACCEPTED_KEY = "hard_prompt_denied"; // Player pref key (int) for seeing if the user ever denied apple hard prompt
+	public const string GOOGLE_ZID_UPGRADE_SAMPLE = "google_zid_upgrade_sample"; // The generated sample from 0-1 that identifies the user's bucket for zid upgrade.
+	public const string SUPER_STREAK_EXPIRATION_TIME = "super_streak_expiration_time"; // The UTC timestamp of the next time the super streak bonus will expire, this is set everytime we collect the daily bonus while on the streak.
+	public const string LOADING_SCREEN_THEME = "loading_screen_theme";  // local copy of LiveData LOADING_SCREEN_THEME  (which is not available at app startup since LiveData isnt loaded yet) (SIR-only now)
+	public const string HAS_SHOWN_PPU_COMPLETE = "has_shown_ppu_complete"; // Whether or not the user has seen the partner power up  
+	public const string HAS_SHOWN_PPU_START = "has_shown_ppu_start"; // Whether or not the user has seen the partner power up start anim
+	public const string PPU_ANON_USER_ICON = "ppu_anon_user_icon"; // The users PPU icon filename to load (if anon)
+	public const string PPU_ANON_BUDDY_ICON = "ppu_anon_buddy_icon"; // Buddy icon filename to load (if anon)
+	public const string HAS_SPUN_LUCKY_DEAL = "has_spun_lucky_deal"; // true if player has seen the lucky deal spin
+	public const string GAME_BACKGROUND_SKIN = "game_background_skin_{0}"; // Store the current skin in games with multiple outcomes e.g. gen53
+	public const string LAST_NUDGED_TIME = "previous_nudge_timestamp";
+	public const string SIMULATED_USER_ID = "simulateUserZid";
+	public const string GDPR_TOS_VIEWED = "GDPRTOSViewed"; //written when user has accepted the tos
+	public const string FACEBOOK_CONNECT_FAILED = "facebook_connect_failed"; //Written to when the player actively tries to sign in but fails
+	public const string LIVE_DATA_VERSION = "live_data_version"; // Live data version
+	public const string CACHED_LIVE_DATA = "cached_live_data"; //Store basic game data as cached
+	public const string CACHED_LIVE_DATA_TIMESTAMP = "cached_live_data_timestamp"; // The live data cache has a TTL of 1 week
+	public const string HAS_FB_CONNECTED_SUCCESSFULLY = "has_fb_connected_successfully"; //Written to once the player has connected and checked during login to see if they're anon but were last seen as being connected
+	public const string HAS_APPLE_CONNECTED_SUCCESSFULLY = "has_apple_connected_successfully"; //Written to once the player had connected to apple and checked during login ot see if they're anon but were last seen as being connected
+	public const string NETWORK_FRIENDS_SEEN_ZIDS = "network_friends_seen_zids"; // Tracks new friends.
+	public const string NETWORK_FRIEND_REQUESTS_SEEN_ZIDS = "network_friend_requests_seen_zids";// Track new friend requests.
+	public const string USER_SELECTED_LOGOUT = "user_selected_logout";
+	public const string DYNAMIC_MOTD_CONFIG_VERSION = "dynamic_motd_config_version";
+	public const string DYNAMIC_MOTD_EOS_VARIANT = "dynamic_motd_v2_variant";
+	public const string SEEN_DYNAMIC_MOTD_TEMPLATES = "seen_dynamic_motd_templates";
+	public const string SEEN_SLOTVENTURES_LOBBY = "seen_slotventures_lobby";
+	public const string LAST_SEEN_DYNAMIC_VIDEO = "last_seen_dynamic_video";
+	public const string UA_FTUE_COMPLETED = "ua_ftue_completed";
+	public const string MAX_ACTION_HISTORY_COUNT = "maxActionHistoryCount";
+	public const string DAILY_BONUS_FORCED_WAS_NEW_PLAYER = "dailyBonusForcedWasNewPlayer";
+	public const string QFC_RACE_INFO = "qfcRaceInfo";
+	public const string CACHED_TEAM_LEAD = "cachedTeamLead";
+	public const string KEYS_TRIGGER_INDEX = "keysTriggerIndex";
+	public const string PLAYER_LEVEL = "player_level";
+	public const string FB_AUTH_COUNT = "fb_auth_count";
+	public const string FB_AUTH_SESSION_NUM = "fb_auth_session_num";
+	public const string FB_DIALOG_VIEW_COUNT= "fb_dialog_view_count";
+	public const string LOGIN_COUNT = "login_count";
+	public const string INBOX_VIEW_COUNT = "inbox_view_count";
+	public const string VERBOSE_LOGGING = "verbose_logging";
+	public const string FTUE_FIRST_LOGIN = "ftue_first_login";
+	public const string FTUE_GAME_INTRO = "ftue_game_intro";
+	public const string FTUE_CHALLENGE_INTRO = "ftue_challenge_intro";
+	public const string FTUE_CHALLENGE_COMPLETE = "ftue_challenge_complete";
+	public const string FTUE_ABORT = "ftue_abort";
+	public const string LAST_USER_ACTION = "last_user_action";
+	public const string IDFA_SOFTPROMPT_VIEW_COUNT = "idfa_softprompt_view_count";
+	public const string IDFA_SOFTPROMPT_AT_ENTRY_TIME = "idfa_softprompt_at_entry_time";
+	public const string IDFA_SOFTPROMPT_AT_W2E_TIME = "idfa_softprompt_at_w2e_time";
+	public const string FB_ACCESS_TOKEN_EXPIRATION_TIME = "fb_access_token_expiration_time";
+	public const string FB_ACCESS_TOKEN_STRING = "fb_access_token_string";
+	public const string FB_ACCESS_TOKEN_USER_ID = "fb_access_token_USER_ID";
+	public const string FB_ACCESS_TOKEN_LAST_REFRESH = "fb_access_token_last_refresh";
+	public const string FB_ACCESS_TOKEN_PERMISSIONS = "fb_access_token_permissions";
+}
+
+// Debug/Editor keys - Only put keys here that are used for debugging or editor-only stuff.
+public static class DebugPrefs
+{
+	public const string EDITOR_CONFIG_FILE = "editorSelectedConfigFile";
+	public const string CONFIG_OVERRIDE_PATH = "configOverridePath";
+	public const string FORCE_INTRO = "force_intro_welcome";
+	public const string USE_ASSET_BUNDLES = "useAssetBundles";
+	public const string USE_LOCAL_BUNDLES = "useLocalBundles";
+	public const string USE_SD_BUNDLES = "useSDBundles";
+	public const string DONT_WAIT = "dontWait";
+	public const string LOCALE = "locale";
+	public const string CURRENT_LANGUAGE = "currentLanguage";
+	public const string OPTIONAL_LOGS = "debugOptionalLogs";
+	public const string SERVER_DEBUGGING = "debugServerDebugging";
+	public const string MIN_LOG_LEVEL = "minLogLevel";
+	public const string ZYNGA_TRAMP = "shouldUseZyngaTramp";
+	public const string IS_CRAPPY_DEVICE = "isCrappyDevice";
+	public const string DOTS_PER_INCH = "dotsPerInch";
+	public const string TARGET_FRAME_RATE = "targetFrameRate";
+	public const string APP_START_COUNT = "appStartCount";
+	public const string FORCE_GC_LOGIN_PROMPT = "force_gc_login_prompt";
+	public const string LOCAL_URL = "localURL";
+	public const string LOBBY_INBOX_ICON_GROUP = "lobbyInboxIconGroup";
+	public const string LOBBY_INBOX_ICON_GAME = "lobbyInboxIconGame";
+	public const string STREAM_NULL_TEXTURES = "streamNullTextures";
+	public const string STREAM_TEXTURES_DELAY = "streamTexturesDelay";
+	public const string SIMULATED_INSTALLED_APP_IDS = "simulatedInstalledAppIds";
+	public const string ECONOMY_LOG_ENABLED = "debugEconomyLog";
+	public const string SHOW_STARTUP_MOTDS = "showStartupMOTDs";
+	public const string MARK_MOTDS_SEEN = "markMOTDsSeen";
+	public const string STARTED_FROM_COMMAND_LINE = "startedFromCommandLine";
+	public const string LAST_TRACKED_AUDIO = "lastTrackedAudio";				// the last audio key that was being tracked by DevGUIMenuAudio.
+	public const string AUDIO_MAKER_WAV_FOLDER = "audioMakerWavFolder";
+	public const string AUDIO_MAKER_OUTPUT_FOLDER = "audioMakerOutputFolder";
+	public const string AUDIO_MAKER_GAME_KEY = "audioMakerGameKey";
+	public const string AUDIO_IMPORT_SRC_FOLDER = "audioImportSrcFolder";
+	public const string AUDIO_IMPORT_DEST_FOLDER = "audioImportDestFolder";
+	public const string AUDIO_IMPORT_MAX_DEPTH = "audioImportMaxDepth";
+	public const string DEVGUI_NOTIF_REMEBER_ZID = "devGuiNotifRememberZid";
+	public const string DEVGUI_COUNTRY_CODE = "devGuiCountryCode";
+	public const string LAUNCH_DIRECTLY_INTO_GAME = "launchDirectlyIntoGame";
+	public const string LAUNCH_DIRECTLY_GAME_KEY = "launchDirectlyGameKey";
+	public const string LAUNCH_DIRECTLY_INTO_GAME_ALWAYS = "launchDirectlyIntoGameAlways";
+	public const string SUPPRESS_ALL_DIALOGS = "suppressAllDialogs";
+	public const string NORMALIZED_PORTRAIT_MODE_SAFE_AREA_OFFSET = "normalizedPortraitModeSafeAreaOffset";
+	public const string FORCE_WEBGL_LANDSCAPE_IN_PORTRAIT_MODE_GAMES = "forceWebglLandscapeInPortraitModeGames";
+	public const string FORCE_WEBGL_DOTCOM_MODE = "forceWebglDotCom";
+	public const string QUICK_FB_LOGIN_DATA = "quickFBLoginData";
+	public const string SLOTVENTURE_THEME_OVERRIDE = "slotventureThemeOverride";
+	public const string PRIZE_POP_THEME_OVERRIDE = "prizePopThemeOverride";
+	public const string FAKE_SERVER_EVENT_QUEUE = "fakeEventQueue";
+}
